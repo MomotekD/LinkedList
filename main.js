@@ -18,3 +18,6 @@ console.log(list.getHead());
 console.log(list.getTail());
 
 console.log(list.atIndex(2));
+
+console.log(list.pop());
+console.log(list.toString());

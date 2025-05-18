@@ -62,7 +62,18 @@ class LinkedList {
         return current;
     }
     pop(){
-        
+        let current = this.head;
+        if(current === null){
+            return null;
+        }
+        while(current !== null){
+            if(current.nextNode.nextNode === null){
+                const deletedNode = current.nextNode;
+                current.nextNode = null;
+                return deletedNode;
+            }
+            current = current.nextNode;
+        }
     }
 }
 
