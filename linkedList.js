@@ -63,13 +63,91 @@ class LinkedList {
     }
     pop(){
         let current = this.head;
-        if(current === null){
-            return null;
+        if(this.head === null){
+            return null
+        }
+        if(current.nextNode === null){
+            const deletedNode = current;
+            this.head = null;
+            return deletedNode;
         }
         while(current !== null){
             if(current.nextNode.nextNode === null){
                 const deletedNode = current.nextNode;
                 current.nextNode = null;
+                return deletedNode;
+            }
+            current = current.nextNode;
+        }
+        return null;
+    }
+    contains(value){
+        let current = this.head;
+        while(current !== null){
+            if(current.value === value){
+                return true;
+            }
+            current = current.nextNode;
+        }
+        return false;
+    }
+    find(value){
+        let current = this.head;
+        let index = 0;
+        while(current !== null){
+            if(current.value === value){
+                return index;
+            }
+            current = current.nextNode;
+            index++
+        }
+        return null;
+    }
+    insertAt(value, index){
+        const newNode = new Node(value);
+        let current = this.head;
+        if(index === 0){
+                newNode.nextNode = this.head;
+                this.head = newNode;
+                return newNode;
+            }
+        if(index >= this.size() + 1 || index < 0){
+            return null
+        }
+        for(let i = 0; i <= index; i++){
+            if(current === null){
+                return null;
+            }
+            if(i === index - 1){
+                newNode.nextNode = current.nextNode;
+                current.nextNode = newNode;
+                return newNode;
+            }
+            current = current.nextNode;
+        }
+    }
+    removeAt(index){
+        let current = this.head;
+        if(current === null){
+            return null;
+        }
+        if(index === 0){
+            this.head = current.nextNode;
+            return current
+        }
+        if(index >= this.size() || index < 0){
+            return null
+        }
+        for(let i = 0; i < index; i++){
+            if(current === null){
+                return null;
+            }
+            if(i === index - 1){
+                if(current.nextNode === null){
+                    return null
+                }
+                const deletedNode = current.nextNode;
+                current.nextNode = current.nextNode.nextNode;
                 return deletedNode;
             }
             current = current.nextNode;
